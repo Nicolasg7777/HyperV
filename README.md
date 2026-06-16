@@ -7,6 +7,9 @@ Platform to visualize League of Legends player data and provide more insight in 
 We want the data to be available and visual for users to see. That is what this
 Application will solve.
 
+## Table
+<img width="781" height="329" alt="image" src="https://github.com/user-attachments/assets/d1197a4f-378b-49d9-b304-93469439fa87" />
+
 ## Features
 
 - Display Game information.
