@@ -1,0 +1,29 @@
+# HyperV Project.
+---
+Platform to visualize League of Legends player data and provide more insight in their match history.
+
+## About
+
+We want the data to be available and visual for users to see. That is what this
+Application will solve.
+
+## Features
+
+- Display Game information.
+    - Game History.
+        - match summary (win or lose: 'win': True or False)
+        - Match Ranks (get ranks of each puuid)
+        - K/D/A (get each kda for each puuid: 'kda')
+        - K/D percentage. (k/d (* 100))
+        - participants (puuid)
+            - ally team (team_id)
+            - opposing team (team_id_)
+    - Rank (maybe laTer.)
+
+## Getting Started
+TODO: ?
+
+### Prerequisites
+TODO: ?
+### Installation
+TODO: ?
