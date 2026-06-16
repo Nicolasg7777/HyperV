@@ -27,3 +27,22 @@ TODO: ?
 TODO: ?
 ### Installation
 TODO: ?
+
+### Missing Features
+- Fixing Primary Key Issue
+    - Set primary key to match id and puuid because puuid is the primary key and cannot be unique with different matches in the database.
+- Add proper error handling
+- Add Web interface.
+- Add search to username and tag.  (because username and tag are fixed ATM)
+- Add version control (example: v1.0.0)
+
+### Updates Expected
+- Add missing tables and relations to display missing data 
+    - items
+    - match metadata
+    - champions
+    - duration of match
+    - ward score
+    - total gold accumulated by team
+    - total gold for each player
+- Iterate through more than 1 match being seen. (expecting to see a history of 10 matches per page)
