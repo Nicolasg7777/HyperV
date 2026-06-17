@@ -1,9 +1,12 @@
 # All API Requests will go here.
 
 import requests
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+api_key = os.getenv("API_KEY")
 
-api_key = "THIS IS WHERE YOU PUT API KEY"
 account_v1 = f"https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/"
 match_v5 = f"https://americas.api.riotgames.com/lol/match/v5/matches/"
 
