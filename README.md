@@ -9,6 +9,9 @@ HyperV pulls a player's match data from the Riot Games API and stores it in a lo
 ## Preview
 
 <img width="781" height="329" alt="image" src="https://github.com/user-attachments/assets/d1197a4f-378b-49d9-b304-93469439fa87" />
+<img width="820" height="398" alt="image" src="https://github.com/user-attachments/assets/2ed43fbb-b019-4a18-a3b2-23bdcb6a1b68" />
+
+
 
 ## Tech Stack
 
