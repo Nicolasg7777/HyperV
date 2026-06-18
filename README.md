@@ -1,100 +1,81 @@
-# HyperV Project.
----
-Platform to visualize League of Legends player data and provide more insight in their match history.
+# HyperV
+
+Platform to visualize League of Legends player game data and provide insight into their match history.
 
 ## About
 
-We want the data to be available and visual for users to see. That is what this
-Application will solve.
+HyperV pulls a player's match data from the Riot Games API and stores it in a local SQLite database, so the information is available and easy to visualize.
 
-## Table
+## Preview
+
 <img width="781" height="329" alt="image" src="https://github.com/user-attachments/assets/d1197a4f-378b-49d9-b304-93469439fa87" />
+
+## Tech Stack
+
+- **Python 3**
+- **SQLite** for local storage
+- **Riot Games API** (Account-V1 and Match-V5)
+- **requests** and **python-dotenv**
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.10 or newer (developed on 3.14)
+- A Riot Games API key — get one at https://developer.riotgames.com
+
+### Installation
+
+1. Clone the repository.
+2. (Optional) Create and activate a virtual environment.
+3. Install the dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Create a `.env` file in the project root with your API key:
+   ```
+   API_KEY=your-riot-api-key-here
+   ```
+
+### Usage
+
+Run the app:
+
+```bash
+python main.py
+```
+
+This fetches the most recent match for the configured Riot ID, parses each participant, and stores the data in `league.db`.
 
 ## Features
 
-- Display Game information.
-    - Game History.
-        - match summary (win or lose: 'win': True or False)
-        - Match Ranks (get ranks of each puuid)
-        - K/D/A (get each kda for each puuid: 'kda')
-        - K/D percentage. (k/d (* 100))
-        - participants (puuid)
-            - ally team (team_id)
-            - opposing team (team_id_)
-    - Rank (maybe laTer.)
+- Match summary (win or loss)
+- Champion played per participant
+- K/D/A per player
+- Team and team position per participant
+- Items per participant (item0–item6)
 
-## Getting Started
-TODO: ?
+## Roadmap
 
-### Prerequisites
-TODO: ?
-### Installation
-TODO: ?
+- [ ] Add search by username and tag (currently fixed).
+- [ ] Loop over all 20 match IDs instead of only the newest one.
+- [ ] Finish the `match` table (game mode, queue id, duration, game start, patch, total gold, ward score) and wire up `insert_match_information`.
+- [ ] Add a `champion` lookup table (champion_Id, name, icon_url).
+- [ ] Add an `item` lookup table (item_Id, icon_url) for item names and icons.
+- [ ] Give `item` a primary key and a composite foreign key to `league(puuid, match_Id)`.
+- [ ] Add proper error handling.
+- [ ] Add a web interface.
 
-### Missing Features
-- Add proper error handling
-- Add Web interface.
-- Add search to username and tag.  (because username and tag are fixed ATM)
+## Changelog
 
-### Updates Expected
-- Add missing tables and relations to display missing data 2/3 done.
-    - match metadata
-        - game mode - in Progress.
-        - queue id - in Progress.
-        - duration - in Progress.
-        - game start - in Progress.
-        - patch ?
-        - champions - in Progress.
-        - ward score - in Progress.
-        - total gold accumulated by team - in Progress.
-        - total gold for each player - in Progress.
-- Iterate through more than 1 match being seen. (expecting to see a history of 10 matches per page)
+### [1.0.1] – 2026-06-16
 
-  ## Known Issues (not yet fixed)                                                                                                                                                                                                                                   
-                                                                                                                                                                                                                                                                    
-  ### High priority                                                                                                                                                                                                                                                 
-  - [ ] `item` table has no primary key / unique constraint, so `INSERT OR IGNORE`                                                                                                                                                                                  
-        never dedupes — every run of `main.py` adds 10 duplicate item rows.                                                                                                                                                                                         
-  - [ ] `item` table isn't linked to `league` (foreign key was removed to clear a                                                                                                                                                                                   
-        syntax error). `puuid` is just a loose column with no enforced relationship.                                                                                                                                                                                
-  - [ ] API key is hardcoded in `extract.py` — move it to an environment variable /                                                                                                                                                                                 
-        `.env` BEFORE committing or pushing (git history is permanent).                                                                                                                                                                                             
-                                                                                                                                                                                                                                                                    
-  ### Medium priority                                                                                                                                                                                                                                               
-  - [ ] `insert_match_information` (models.py) is broken: 9 columns vs 10 `?`                                                                                                                                                                                       
-        placeholders, and uses empty `row2[""]` keys.                                                                                                                                                                                                               
-  - [ ] `get_matches_id_by_puuid` and `get_match_info_by_id` (extract.py) don't check                                                                                                                                                                               
-        `response.status_code` like `account_by_riot` does — a failed call crashes.                                                                                                                                                                                 
-  - [ ] Only the newest match is fetched (`data[0]`); the other 19 match IDs are ignored.                                                                                                                                                                           
-  - [ ] Riot ID is hardcoded to `('LEGEND', 'NnE')` — can't query other accounts.                                                                                                                                                                                   
-                                                                                                                                                                                                                                                                    
-  ### Low priority / cleanup                                                                                                                                                                                                                                        
-  - [ ] No `.gitignore` — `.venv/`, `.idea/`, `__pycache__/`, `*.db`, `data.json` get tracked.                                                                                                                                                                      
-  - [ ] `win` column is `REAL`; should be `INTEGER` (0/1) since it's a boolean.                                                                                                                                                                                     
-  - [ ] Connections from `get_connection()` are never closed.                                                                                                                                                                                                       
-  - [ ] `championName` is stored in both `league` and `item` (duplicated data).                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                    
-  ## Roadmap (implement next)                                                                                                                                                                                                                                       
-  - [ ] Add a primary key + composite foreign key to `item` so it links to                                                                                                                                                                                          
-        `league(puuid, match_Id)` — re-add the FK correctly (no `NOT NULL` inside the clause).                                                                                                                                                                      
-  - [ ] Finish the `match` table (game_mode, queue_id, duration, game_start, patch,                                                                                                                                                                                 
-        totalGold, wardScore) and wire up `insert_match_information`.                                                                                                                                                                                               
-  - [ ] Add a `champion` lookup table (champion_Id, name, icon_url).                                                                                                                                                                                                
-  - [ ] Add an `item` lookup table (item_Id, icon_url) for item names/icons.                                                                                                                                                                                        
-  - [ ] Loop over all 20 match IDs instead of just the newest one.                                                                                                                                                                                                  
-  - [ ] Move the API key to `.env` and load it with `os.environ` / python-dotenv.
+**Added**
+- Item tracking per participant (item0–item6).
 
+**Fixed**
+- `league` primary key changed from `puuid` alone to the composite `(puuid, match_Id)`. A player's puuid repeats across matches, so puuid alone isn't unique — the pair is (one row per player per match).
 
+## License
 
-### Version 1.0.1
-
-##### Added features
-  ## [1.0.1] - 2026-06-16                                                                                                                                                                                                                                           
-                                                                                                                                                                                                                                                                    
-  ### Added                                                                                                                                                                                                                                                         
-  - Item tracking per participant (item0–item6)                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                    
-  ### Fixed                                                                                                                                                                                                                                                         
-  - League primary key changed from `puuid` alone to the composite                                                                                                                                                                                                  
-    `(puuid, match_Id)`. A player's puuid repeats across matches, so puuid                                                                                                                                                                                          
-    alone isn't unique; the pair is — one row per player per match.
+This project does not currently have a license.

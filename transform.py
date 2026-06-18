@@ -41,14 +41,14 @@ def parse_data(data):
 
 
 # This is where i am working on the features in progress.
-def match_data(MatchData):
-    con = get_connection()
-    for i in MatchData()["info"]["participantFrames"]:
-        var3 = {
-            "totalGold": i[9]["totalGold"],
-
-        }
-        print(var3)
+#def match_data(MatchData):
+#    con = get_connection()
+#    for i in MatchData()["info"]["participantFrames"]:
+#        var3 = {
+#            "totalGold": i[9]["totalGold"],
+#
+#        }
+#        print(var3)
 
 # find each participants - done
 # win or loss - done

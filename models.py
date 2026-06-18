@@ -13,9 +13,9 @@ def insert_item_information(conn, row1):
     )
     conn.commit()
 # This is where i am working on the features in progress.
-def insert_match_information(conn, row2):
-    conn.execute(
-        "INSERT OR IGNORE INTO match(match_Id,championName,totalGold,wardScore,puuid,game_mode,queue_id,duration,game_start) VALUES(?,?,?,?,?,?,?,?,?,?)",
-        (row2["matchId"],row2[""],row2[""],row2[""],row2[""],row2[""],row2[""],row2[""],row2[""],row2[""])
-    )
+#def insert_match_information(conn, row2):
+#conn.execute(
+#        "INSERT OR IGNORE INTO match(match_Id,championName,totalGold,wardScore,puuid,game_mode,queue_id,duration,game_start) VALUES(?,?,?,?,?,?,?,?,?,?)",
+#        (row2["matchId"],row2[""],row2[""],row2[""],row2[""],row2[""],row2[""],row2[""],row2[""],row2[""])
+#    )
 
