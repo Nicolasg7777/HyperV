@@ -27,6 +27,7 @@ def parse_data(data):
     con = get_connection()
     for i in data["info"]["participants"]:
         var2 = {
+            "matchId": data["metadata"]["matchId"],
             "championName": i["championName"],
             "puuid": i["puuid"],
             "item0": i["item0"],
@@ -40,7 +41,6 @@ def parse_data(data):
         insert_item_information(con, var2)
 
 
-# This is where i am working on the features in progress.
 #def match_data(MatchData):
 #    con = get_connection()
 #    for i in MatchData()["info"]["participantFrames"]:

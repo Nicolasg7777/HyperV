@@ -27,10 +27,11 @@ def create_table(conn):
 
     conn.commit()
 
-    print("table created successfully")
+    print("league table created successfully")
 
     conn.execute("""
         CREATE TABLE IF NOT EXISTS item(
+        match_Id TEXT NOT NULL,
         item0 INT NOT NULL,
         item1 INT NOT NULL,
         item2 INT NOT NULL,
@@ -39,28 +40,30 @@ def create_table(conn):
         item5 INT NOT NULL,
         item6 INT NOT NULL,
         puuid TEXT NOT NULL,
-        championName TEXT NOT NULL
+        championName TEXT NOT NULL,
+        FOREIGN KEY(puuid, match_Id) REFERENCES league(puuid, match_Id)
         )
     """)
     conn.commit()
 
-    print("table2 created successfully")
+    print("item table created successfully")
 
 # This is where i am working on the features in progress.
-    conn.execute('''CREATE TABLE IF NOT EXISTS match (
-        match_Id TEXT NOT NULL,
-        championName TEXT NOT NULL,
-        totalGold INT NOT NULL,
-        wardScore INT NOT NULL,
-        puuid TEXT NOT NULL,
-        game_mode TEXT NOT NULL,
-        queue_id INT NOT NULL,
-        duration INT NOT NULL,
-        game_start INT NOT NULL,
-        patch TEXT NOT NULL,
-        PRIMARY KEY (puuid, match_Id)
-        )
-    ''')
+#    conn.execute('''CREATE TABLE IF NOT EXISTS match (
+#        match_Id TEXT NOT NULL,
+#        championName TEXT NOT NULL,
+#        totalGold INT NOT NULL,
+#        puuid TEXT NOT NULL,
+#        game_mode TEXT NOT NULL,
+#        queue_id INT NOT NULL,
+#        duration INT NOT NULL,
+#        game_start INT NOT NULL,
+#        PRIMARY KEY (puuid, match_Id)
+#        FOREIGN KEY(match_Id) REFERENCES league(match_Id)
+#       )
+#    ''')
+#    conn.commit()
+#    print("match table created successfully")
 
 #    conn.execute('''CREATE TABLE IF NOT EXISTS champion (
 #        champion_Id INT PRIMARY KEY,
