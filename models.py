@@ -13,9 +13,11 @@ def insert_item_information(conn, row1):
     )
     conn.commit()
 
-#def insert_match_information(conn, row2):
-#    conn.execute(
-#        "INSERT OR IGNORE INTO match(match_Id,championName,totalGold,puuid,game_mode,queue_id,duration,game_start) VALUES(?,?,?,?,?,?,?,?,?)",
-#        (row2["matchId"],row2["championId"],row2["totalGold"],row2["puuid"],row2["game_mode"],row2[""],row2[""],row2[""],row2[""])
-#    )
+def insert_match_information(conn, row2):
+    conn.execute(
+        "INSERT OR IGNORE INTO match(gameMode,puuid,championName,gameDuration,goldEarned,match_Id) VALUES(?,?,?,?,?,?)",
+        (row2["gameMode"],row2["puuid"],row2["championName"],row2["gameDuration"],row2["goldEarned"],row2["match_Id"])
+    )
+    conn.commit()
+
 

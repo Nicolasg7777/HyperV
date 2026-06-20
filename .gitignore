@@ -3,5 +3,5 @@ __pycache__/
 .idea/
 *.db
 data.json
-MatchData.json
+matchData.json
 .env

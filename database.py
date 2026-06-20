@@ -48,22 +48,21 @@ def create_table(conn):
 
     print("item table created successfully")
 
-# This is where i am working on the features in progress.
-#    conn.execute('''CREATE TABLE IF NOT EXISTS match (
-#        match_Id TEXT NOT NULL,
-#        championName TEXT NOT NULL,
-#        totalGold INT NOT NULL,
-#        puuid TEXT NOT NULL,
-#        game_mode TEXT NOT NULL,
-#        queue_id INT NOT NULL,
-#        duration INT NOT NULL,
-#        game_start INT NOT NULL,
-#        PRIMARY KEY (puuid, match_Id)
-#        FOREIGN KEY(match_Id) REFERENCES league(match_Id)
-#       )
-#    ''')
-#    conn.commit()
-#    print("match table created successfully")
+
+    conn.execute('''CREATE TABLE IF NOT EXISTS match (
+        match_Id TEXT NOT NULL,
+        gameMode TEXT NOT NULL,
+        puuid TEXT NOT NULL,
+        championName TEXT NOT NULL,
+        goldEarned INT NOT NULL,
+        gameDuration INT NOT NULL,
+        PRIMARY KEY (gameMode, puuid)
+        FOREIGN KEY(puuid,match_Id) REFERENCES league(puuid, match_Id)
+        )
+    ''')
+    conn.commit()
+    print("match table created successfully")
+
 
 #    conn.execute('''CREATE TABLE IF NOT EXISTS champion (
 #        champion_Id INT PRIMARY KEY,

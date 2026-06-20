@@ -1,14 +1,12 @@
 # give me a example of data transfer objects in python from json to python object , displaying deserialization
 
 from database import get_connection
-from models import insert_information, insert_item_information
+from models import insert_information, insert_item_information, insert_match_information
 
 row = []
 row1 = []
+row2 = []
 def parse_data(data):
-    #for i in data["metadata"]["participants"]:
-    #    print(i)
-
     con = get_connection()
     for i in data["info"]["participants"]:
         var = {
@@ -39,24 +37,17 @@ def parse_data(data):
             "item6": i["item6"],
         }
         insert_item_information(con, var2)
-
-
-#def match_data(MatchData):
-#    con = get_connection()
-#    for i in MatchData()["info"]["participantFrames"]:
-#        var3 = {
-#            "totalGold": i[9]["totalGold"],
-#
-#        }
-#        print(var3)
-
-# find each participants - done
-# win or loss - done
-# kda - done
-# kd percentage - done
-# participants team - done
-# keeping it simple.
-
+    for i in data["info"]["participants"]:
+        var3 = {
+            "gameMode": data["info"]["gameMode"],
+            "puuid": i["puuid"],
+            "championName": i["championName"],
+            # divide the game duration by 60 to get minutes and display it minutes.
+            "gameDuration": round(data["info"]["gameDuration"]/60, 2),
+            "goldEarned": i["goldEarned"],
+            "match_Id": data["metadata"]["matchId"],
+        }
+        insert_match_information(con, var3)
 
 # STEP 1: def function
 # Step 2: for each Participant, we want to pick out kills, championName, and puuid.

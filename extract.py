@@ -23,13 +23,13 @@ def get_matches_id_by_puuid(puuid):
     response = requests.get(f'{match_v5}by-puuid/{puuid}/ids?start=0&count=20', headers={"X-Riot-Token": api_key})
     data = response.json()
     # print(data)
-    return data[0]
+    return data[1]
 
 def get_match_info_by_id(match_id):
     response = requests.get(f'{match_v5}{match_id}', headers={"X-Riot-Token": api_key})
     print(response.url)
     data = response.json()
-    # print(data)
+    #print(data)
     return data
 
 # parse_data(get_match_info_by_id(get_matches_id_by_puuid(account_by_riot('LEGEND','NnE'))))
